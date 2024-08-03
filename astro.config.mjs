@@ -5,6 +5,5 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
 	site: 'https://coookieeater.github.io',
-	base: '/',
 	integrations: [mdx(), sitemap()],
 });
