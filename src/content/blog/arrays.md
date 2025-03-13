@@ -13,7 +13,7 @@ Suppose, I declare a matrix **a** consisting of 2 rows and 3 columns as follows:
 
 This tells the compiler to allocate space for the matrix **a** which stores data elements of the type int in the computer memory. In the memory, this matrix will, hence, look like the following:
 
-![alt text](./public/arrays_1.png "Memory allocation diagram of an array")
+![alt text](/simranfarheen.github.io/public/arrays_1.png "Memory allocation diagram of an array")
 
 As per the above representation, two things come into picture:
 1. The data elements are stored in the memory sequentially and in the row-major order.
@@ -31,7 +31,7 @@ Here, b = &(b[0]) = \*(b)
 
 Coming back to a 2-D array, which quintessentially is an array of arrays and can be pictured as follows:
 
-![alt text](./public/arrays_3.png "Memory allocation of a 2-D array")
+![alt text](/simranfarheen.github.io/public/arrays_3.png "Memory allocation of a 2-D array")
 
 Here, a[0] refers to the first row and contains the address of the first element of the zeroth row. Similarly, a[1] contains the address of the first element of the first row. a[0] and a[1] are pointers and point to the first and the second arrays of the matrix respectively. In this case too,  
 
@@ -43,7 +43,7 @@ We will see why this is so.
 
 Consider the below figure, here the first table contains the address, corresponding name and data value of a variable. Note that **a** contains a value that is a memory address (in hex) and is therefore a pointer.
 
-![alt text](./public/arrays_2.png "Memory allocation of a 2-D array")
+![alt text](/simranfarheen.github.io/public/arrays_2.png "Memory allocation of a 2-D array")
 
 Also, note that the pointer points to a location (or contains the address of a location) which is the same as its own. Meaning, it points to itself.
 
@@ -55,7 +55,7 @@ When we dereference a we get the value of **a** which is 0x23fe30. When we furth
 
 Now, the values that \*(\*(a+i)+j) takes becomes clearer.
 
-![alt text](./public/arrays_4.png "Memory allocation of a 2-D array")
+![alt text](/simranfarheen.github.io/public/arrays_4.png "Memory allocation of a 2-D array")
 
 On performing \*(a+i), we add the address of a with the total bytes occupied by the array(pointer) that a is pointing to, one time (as specified as the value of i). 
 
