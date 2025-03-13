@@ -1,190 +1,617 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
----
+        import BaseHead from '../components/BaseHead.astro';
+        import Header from '../components/Header.astro';
+        import Footer from '../components/Footer.astro';
+        import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+        ---
 
 <!doctype html>
 <html lang="en">
-    <head>
-       <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-       <style>
-          .timeline-container {
-             max-width: 800px;
-             margin: 0 auto;
-             padding: 20px;
-          }
+<head>
+   <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+   <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-          .timeline {
-             position: relative;
-             margin: 40px 0;
-          }
+      :root {
+         --primary-color: #3a86ff;
+         --secondary-color: #4361ee;
+         --accent-color: #4cc9f0;
+         --text-primary: #2b2d42;
+         --text-secondary: #555b6e;
+         --background-light: #ffffff;
+         --background-off: #f8f9fa;
+         --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.05);
+         --transition-smooth: all 0.3s ease;
+      }
 
-          .timeline::before {
-             content: '';
-             position: absolute;
-             left: 70px;
-             width: 4px;
-             height: 100%;
-             background: #2563eb;
-          }
+      html, body {
+         min-height: 100%;
+         scroll-behavior: smooth;
+      }
 
-          .timeline-item {
-             position: relative;
-             padding-left: 110px;
-             margin-bottom: 50px;
-          }
+      main {
+         min-height: 100vh;
+      }
 
-          .timeline-dot {
-             position: absolute;
-             left: 64px;
-             width: 16px;
-             height: 16px;
-             border-radius: 50%;
-             background: #2563eb;
-             border: 4px solid white;
-             box-shadow: 0 0 0 3px #2563eb;
-          }
+      body {
+         font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+         color: var(--text-primary);
+         line-height: 1.7;
+         margin: 0;
+         padding: 0;
+         background-color: var(--background-off);
+      }
 
-          .timeline-date {
-             position: absolute;
-             left: 0;
-             width: 55px;
-             text-align: right;
-             font-weight: bold;
-             color: #2563eb;
-             white-space: nowrap;
-          }
+      main {
+         width: 100%;
+         box-sizing: border-box;
+      }
 
-          .timeline-content {
-             background: #f8fafc;
-             padding: 20px;
-             border-radius: 8px;
-             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-          }
+      .container {
+         display: flex;
+         flex-direction: column;
+         width: 100%;
+      }
 
-          .timeline-title {
-             margin-top: 0;
-             color: #1e40af;
-             font-size: 1.5rem;
-          }
+      @media (min-width: 768px) {
+         .container {
+            flex-direction: row;
+            min-height: calc(100vh - 60px); /* Adjust based on your header height */
+         }
+      }
 
-          .timeline-company {
-             color: #64748b;
-             font-weight: 600;
-             margin-bottom: 10px;
-          }
+      .profile-column {
+         padding: 30px 25px;
+         background-color: var(--background-light);
+         border-right: none;
+         z-index: 10;
+      }
 
-          .timeline-description ul {
-             padding-left: 20px;
-          }
+      .profile-column-inner {
+         max-width: 450px;
+         margin: 0 auto 0 0; /* Left aligned */
+         text-align: left; /* Left aligned content */
+      }
 
-          .profile-intro {
-             max-width: 800px;
-             margin: 0 auto 40px;
-             text-align: center;
-          }
+      .timeline-column {
+         padding: 40px 30px;
+         flex-grow: 1;
+         background-color: var(--background-light);
+         overflow-y: auto; /* Make only timeline scrollable */
+      }
 
-          h1 {
-             font-size: 2.5rem;
-             margin-bottom: 10px;
-          }
+      @media (min-width: 768px) {
+         .profile-column {
+            width: 38%;
+            position: sticky;
+            top: 0;
+            align-self: flex-start;
+            height: 100vh;
+            overflow-y: auto; /* Make profile column scrollable */
+            border-radius: 0;
+         }
 
-          .subtitle {
-             font-size: 1.2rem;
-             color: #64748b;
-             margin-bottom: 20px;
-          }
-       </style>
-    </head>
-    <body>
-       <Header />
-       <main>
-          <div class="profile-intro">
-             <h1>Hello, I'm Simran</h1>
-             <p class="subtitle">Software Engineer with expertise in Java, Microservices, and Cloud Technologies</p>
-             <p>I build scalable backend systems and enjoy solving complex problems. Here's my professional journey so far.</p>
-          </div>
+         .timeline-column {
+            width: 62%;
+            margin-left: 0;
+            padding-left: 50px;
+            max-height: 100vh; /* Limit height to viewport */
+         }
+      }
 
-          <div class="timeline-container">
-             <div class="timeline">
-                <div class="timeline-item">
-                   <div class="timeline-date">2021</div>
-                   <div class="timeline-dot"></div>
-                   <div class="timeline-content">
-                      <h3 class="timeline-title">Software Engineer</h3>
-                      <div class="timeline-company">Visa Direct, Visa Inc. (2021 - 06/2024)</div>
-                      <div class="timeline-description">
-                         <ul>
-                            <li>Developed micro-services for data replication and querying related to India's outward remittances to meet regulatory requirements</li>
-                            <li>Built a near real-time pipeline (< 50ms) for capturing payment API observability metrics</li>
-                            <li>Led a team to create an MVP for intelligent querying of payment data using Elasticsearch</li>
-                            <li>Drove 100% adoption of Feature Toggle platform across teams</li>
-                         </ul>
-                      </div>
-                   </div>
-                </div>
+      .profile-image {
+         width: 180px;
+         height: 180px;
+         border-radius: 50%;
+         background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         margin: 0 auto 30px;
+         border: 5px solid var(--background-light);
+         box-shadow: var(--shadow-soft);
+         overflow: hidden;
+         transition: var(--transition-smooth);
+      }
 
-                <div class="timeline-item">
-                   <div class="timeline-date">2019</div>
-                   <div class="timeline-dot"></div>
-                   <div class="timeline-content">
-                      <h3 class="timeline-title">Software Engineer</h3>
-                      <div class="timeline-company">Platform and Core Engineering, Visa Inc. (2019 - 2021)</div>
-                      <div class="timeline-description">
-                         <ul>
-                            <li>Maintained in-house Hazelcast clusters and client wrapper libraries</li>
-                            <li>Developed automation to remediate security vulnerabilities in third-party libraries, reducing manual effort by 90%</li>
-                            <li>Contributed to migrating notification services from YesMail to Adobe Messaging Centre</li>
-                         </ul>
-                      </div>
-                   </div>
-                </div>
+      .profile-image:hover {
+         transform: scale(1.05);
+      }
 
-                <div class="timeline-item">
-                   <div class="timeline-date">2018</div>
-                   <div class="timeline-dot"></div>
-                   <div class="timeline-content">
-                      <h3 class="timeline-title">Software Engineer</h3>
-                      <div class="timeline-company">Cybersecurity, Visa Inc. (2018 - 2019)</div>
-                      <div class="timeline-description">
-                         <ul>
-                            <li>Migrated access request forms from Viper to ServiceNow, reducing fulfillment time from 7 days to 24 hours</li>
-                            <li>Mentored cross-functional teams on securing applications with OpenSAML and Forgerock OpenAM integration</li>
-                         </ul>
-                      </div>
-                   </div>
-                </div>
+      .profile-image-placeholder {
+         color: white;
+         text-align: center;
+         padding: 10px;
+         font-weight: 500;
+         font-size: 1.2rem;
+      }
 
-                <div class="timeline-item">
-                   <div class="timeline-date">2014</div>
-                   <div class="timeline-dot"></div>
-                   <div class="timeline-content">
-                      <h3 class="timeline-title">Education</h3>
-                      <div class="timeline-company">Birla Institute of Technology, Mesra (2014 - 2018)</div>
-                      <div class="timeline-description">
-                         <p>B.E. in Computer Science & Engineering, achieved First Class with Distinction.</p>
-                      </div>
-                   </div>
-                </div>
-             </div>
-          </div>
+      h1, h2, h3, h4 {
+         font-weight: 600;
+         letter-spacing: -0.02em;
+      }
 
-          <div class="timeline-container">
-             <h2>Technical Skills</h2>
-             <div class="timeline-content">
-                <div class="timeline-description">
-                   <ul>
-                      <li><strong>Programming Languages:</strong> Java, Python, C++</li>
-                      <li><strong>Frameworks and Libraries:</strong> Spring & Springboot, Django, Hazelcast, Kafka</li>
-                      <li><strong>Databases:</strong> Oracle DB, Postgres DB, MySQL, Elasticsearch</li>
-                      <li><strong>Tools and Platforms:</strong> Docker, Kubernetes, Jenkins, Git</li>
-                   </ul>
-                </div>
-             </div>
-          </div>
-       </main>
-       <Footer />
-    </body>
+      h1 {
+         font-size: 2.5rem;
+         color: var(--text-primary);
+         margin-bottom: 10px;
+         text-align: center;
+      }
+
+      .subtitle {
+         font-size: 1.2rem;
+         color: var(--text-secondary);
+         margin-bottom: 25px;
+         text-align: center;
+         font-weight: 500;
+      }
+
+      .bio {
+         margin-bottom: 30px;
+         text-align: justify;
+         padding: 20px;
+         background-color: var(--background-light);
+         border-radius: 16px;
+         border-left: 3px solid var(--primary-color);
+         transition: var(--transition-smooth);
+         font-size: 0.95rem;
+         line-height: 1.6;
+      }
+
+      .bio:hover, .technical-summary:hover {
+         transform: translateX(5px);
+         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      }
+
+      .bio p, .technical-summary p {
+         margin: 0 0 15px;
+      }
+
+      .bio p:last-child, .technical-summary p:last-child {
+         margin-bottom: 0;
+      }
+
+      .technical-summary {
+         margin-bottom: 30px;
+         text-align: justify;
+         padding: 20px;
+         background-color: var(--background-light);
+         border-radius: 16px;
+         border-left: 3px solid var(--secondary-color);
+         transition: var(--transition-smooth);
+         font-size: 0.95rem;
+         line-height: 1.6;
+      }
+
+      .skills-section h3 {
+         font-size: 1.5rem;
+         margin-bottom: 20px;
+         color: var(--text-primary);
+         position: relative;
+         display: inline-block;
+         text-align: center;
+         width: 100%;
+      }
+
+      .skills-section h3:after {
+         content: '';
+         position: absolute;
+         bottom: -8px;
+         left: 50%;
+         transform: translateX(-50%);
+         width: 80px;
+         height: 3px;
+         background: linear-gradient(90deg, var(--primary-color) 0%, var(--accent-color) 100%);
+         border-radius: 2px;
+      }
+
+      .skills-grid {
+         display: flex;
+         flex-wrap: wrap;
+         gap: 10px;
+         margin-top: 20px;
+         clear: both;
+      }
+
+      .skill-tag {
+         background-color: rgba(58, 134, 255, 0.1);
+         padding: 3px 6px;
+         border-radius: 15px;
+         font-size: 0.7rem;
+         font-weight: 500;
+         display: inline-block;
+         transition: var(--transition-smooth);
+         margin-bottom: 4px;
+         margin-right: 4px;
+      }
+
+      .skill-tag:hover {
+         background-color: rgba(58, 134, 255, 0.2);
+         transform: translateX(2px);
+      }
+
+      .skill-category-title {
+         font-weight: 600;
+         margin-bottom: 5px;
+         margin-top: 10px;
+         color: var(--text-primary);
+         font-size: 0.85rem;
+         border-left: 3px solid var(--primary-color);
+         padding-left: 8px;
+      }
+
+      .skill-category-title.languages {
+         border-color: #3a86ff;
+      }
+
+      .skill-category-title.frameworks {
+         border-color: #4cc9f0;
+      }
+
+      .skill-category-title.build {
+         border-color: #4361ee;
+      }
+
+      .skill-category-title.database {
+         border-color: #7209b7;
+      }
+
+      .skill-category-title.transaction {
+         border-color: #f72585;
+      }
+
+      .skill-category-title.architecture {
+         border-color: #3f37c9;
+      }
+
+      .skill-category-title.quality {
+         border-color: #4d908e;
+      }
+
+      .skill-category-title.collaboration {
+         border-color: #fb8500;
+      }
+
+      .skill-list {
+         display: flex;
+         flex-direction: row;
+         flex-wrap: wrap;
+         gap: 8px;
+         margin-bottom: 15px;
+      }
+
+      .skill-tag {
+         background-color: rgba(58, 134, 255, 0.1);
+         padding: 5px 10px;
+         border-radius: 20px;
+         font-size: 0.8rem;
+         font-weight: 500;
+         display: inline-block;
+         transition: var(--transition-smooth);
+      }
+
+      .skill-tag:hover {
+         background-color: rgba(58, 134, 255, 0.2);
+         transform: translateX(-2px);
+      }
+
+      .section-title {
+         font-size: 2rem;
+         color: var(--text-primary);
+         margin-bottom: 40px;
+         padding-bottom: 12px;
+         position: relative;
+      }
+
+      .section-title:after {
+         content: '';
+         position: absolute;
+         bottom: 0;
+         left: 0;
+         width: 60px;
+         height: 4px;
+         background: linear-gradient(90deg, var(--primary-color) 0%, var(--accent-color) 100%);
+         border-radius: 2px;
+      }
+
+      .timeline {
+         position: relative;
+         margin-left: 20px;
+      }
+
+      .timeline::before {
+         content: '';
+         position: absolute;
+         left: 0;
+         top: 0;
+         height: 100%;
+         width: 3px;
+         background: linear-gradient(to bottom, var(--primary-color) 0%, var(--accent-color) 100%);
+         border-radius: 3px;
+      }
+
+      .timeline-item {
+         position: relative;
+         padding-left: 40px;
+         margin-bottom: 50px;
+         transition: var(--transition-smooth);
+      }
+
+      .timeline-item:hover {
+         transform: translateX(5px);
+      }
+
+      .timeline-item:hover .timeline-dot {
+         transform: scale(1.3);
+         background-color: var(--accent-color);
+      }
+
+      .timeline-date {
+         font-weight: 600;
+         color: var(--primary-color);
+         margin-bottom: 8px;
+         display: inline-block;
+         padding: 5px 12px;
+         background-color: rgba(58, 134, 255, 0.1);
+         border-radius: 20px;
+         font-size: 0.9rem;
+      }
+
+      .timeline-dot {
+         position: absolute;
+         left: -10px;
+         top: 5px;
+         width: 20px;
+         height: 20px;
+         background-color: var(--primary-color);
+         border: 3px solid white;
+         border-radius: 50%;
+         box-shadow: 0 0 0 3px rgba(58, 134, 255, 0.2);
+         transition: var(--transition-smooth);
+         z-index: 2;
+      }
+
+      .timeline-title {
+         font-size: 1.4rem;
+         color: var(--text-primary);
+         margin: 0 0 5px 0;
+      }
+
+      .timeline-company {
+         color: var(--text-secondary);
+         margin-bottom: 15px;
+         font-style: italic;
+         font-weight: 500;
+      }
+
+      .timeline-description {
+         background-color: var(--background-off);
+         padding: 20px;
+         border-radius: 16px;
+         box-shadow: var(--shadow-soft);
+      }
+
+      .timeline-description ul {
+         padding-left: 20px;
+         margin: 0;
+      }
+
+      .timeline-description li {
+         margin-bottom: 12px;
+         position: relative;
+      }
+
+      .timeline-description li::before {
+         content: '•';
+         color: var(--primary-color);
+         font-weight: bold;
+         display: inline-block;
+         width: 1em;
+         margin-left: -1em;
+      }
+
+      .timeline-description li:last-child {
+         margin-bottom: 0;
+      }
+
+      @media (max-width: 767px) {
+         .profile-column, .timeline-column {
+            padding: 30px 20px;
+            overflow-y: auto;
+            max-height: none;
+            height: auto;
+         }
+
+         h1 {
+            font-size: 2rem;
+         }
+
+         .section-title {
+            font-size: 1.7rem;
+         }
+      }
+   </style>
+</head>
+<body>
+<Header />
+<main>
+   <div class="container">
+      <div class="profile-column">
+         <div class="profile-column-inner">
+            <div class="profile-image">
+               <img src="/public/profile.jpeg" alt="Simran Farheen">
+            </div>
+
+            <h1>Hello, I'm Simran</h1>
+            <p class="subtitle">Senior Software Engineer</p>
+
+            <div class="bio">
+               <p>I have about 6 years of experience working with enterprise grade software solutions at Visa, Inc. I'm passionate about building data intensive applications that can scale. Throughout my career, I have worked on several infrastructure components, data pipelines, process automation and remain particularly excited about achieving excellent code quality and writing comprehensive technical documentation.  </p>
+            </div>
+
+            <div class="skills-section">
+               <h3>Technical Skills</h3>
+
+               <div class="skill-category-title languages">Languages</div>
+               <div class="skill-list">
+                  <span class="skill-tag">Java</span>
+                  <span class="skill-tag">Python</span>
+                  <span class="skill-tag">C/C++</span>
+                  <span class="skill-tag">Scala</span>
+                  <span class="skill-tag">HTML</span>
+                  <span class="skill-tag">CSS</span>
+                  <span class="skill-tag">JavaScript</span>
+               </div>
+
+               <div class="skill-category-title frameworks">Backend Frameworks</div>
+               <div class="skill-list">
+                  <span class="skill-tag">Spring Boot</span>
+                  <span class="skill-tag">Spring Framework</span>
+                  <span class="skill-tag">Spring Cloud</span>
+                  <span class="skill-tag">Microservices</span>
+                  <span class="skill-tag">Django</span>
+                  <span class="skill-tag">Zookeeper</span>
+               </div>
+
+               <div class="skill-category-title build">Build & Deployments</div>
+               <div class="skill-list">
+                  <span class="skill-tag">CI/CD</span>
+                  <span class="skill-tag">Jenkins</span>
+                  <span class="skill-tag">Docker</span>
+                  <span class="skill-tag">Kubernetes</span>
+               </div>
+
+               <div class="skill-category-title database">Database & Storage</div>
+               <div class="skill-list">
+                  <span class="skill-tag">PostgreSQL</span>
+                  <span class="skill-tag">Oracle DB</span>
+                  <span class="skill-tag">MongoDB</span>
+                  <span class="skill-tag">Elasticsearch</span>
+                  <span class="skill-tag">Spark</span>
+                  <span class="skill-tag">Kafka</span>
+                  <span class="skill-tag">Hadoop</span>
+               </div>
+
+               <div class="skill-category-title transaction">Transaction Systems</div>
+               <div class="skill-list">
+                  <span class="skill-tag">Payment Processing</span>
+                  <span class="skill-tag">Financial Systems</span>
+                  <span class="skill-tag">High-throughput Pipelines</span>
+               </div>
+
+               <div class="skill-category-title architecture">Architecture</div>
+               <div class="skill-list">
+                  <span class="skill-tag">Distributed Systems</span>
+                  <span class="skill-tag">Service Design</span>
+                  <span class="skill-tag">API Development</span>
+                  <span class="skill-tag">System Integration</span>
+               </div>
+
+               <div class="skill-category-title quality">Quality & Reliability</div>
+               <div class="skill-list">
+                  <span class="skill-tag">Automated Testing</span>
+                  <span class="skill-tag">Monitoring</span>
+                  <span class="skill-tag">Performance Optimization</span>
+                  <span class="skill-tag">Fault Tolerance</span>
+               </div>
+
+               <div class="skill-category-title collaboration">Collaboration Tools</div>
+               <div class="skill-list">
+                  <span class="skill-tag">Git</span>
+                  <span class="skill-tag">JIRA</span>
+                  <span class="skill-tag">Confluence</span>
+                  <span class="skill-tag">Code Review</span>
+                  <span class="skill-tag">Documentation</span>
+                  <span class="skill-tag">GenAI</span>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <div class="timeline-column">
+         <h2 class="section-title">Professional Journey</h2>
+
+         <div class="timeline">
+            <div class="timeline-item">
+               <div class="timeline-dot"></div>
+               <div class="timeline-date">2021 - 2024</div>
+               <h3 class="timeline-title">Senior Software Engineer</h3>
+               <div class="timeline-company">Visa Direct, Visa Inc.</div>
+               <div class="timeline-description">
+                  <ul>
+                     <li>Designed and developed micro-services for replicating and querying outbound payments data from India, helping Visa Direct meet RBI regulations and onboard Indian merchants</li>
+                     <li>Architected and developed an MVP for intelligent querying of aggregated payment data using Elasticsearch, NLP and ML libraries in Python</li>
+                     <li>Developed a data pipeline to capture failed payments data within Hadoop File System using Spark jobs built with Scala, helping business teams reduce reporting time for payment failures</li>
+                     <li>Drove 100% adoption of the feature toggle framework for new features in order to enable scheduling feature releases or deploying features on-demand, allowing teams to perform A/B Testing and reduce deployment downtime</li>
+                  </ul>
+               </div>
+            </div>
+
+            <div class="timeline-item">
+               <div class="timeline-dot"></div>
+               <div class="timeline-date">2019 - 2021</div>
+               <h3 class="timeline-title">Senior Software Engineer</h3>
+               <div class="timeline-company">Platform and Core Engineering, Visa Inc.</div>
+               <div class="timeline-description">
+                  <ul>
+                     <li>Worked on core backend Java libraries that formed the foundation of Visa's shared platform, including Common Application Logging (CAL), Data Access Layer (DAL), Secure Access Layer (SAL), and Security Filters</li>
+                     <li>Developed automation to remediate security vulnerabilities in third-party libraries, reducing manual effort by 90% and vulnerability remediation time from weeks to hours</li>
+                     <li>Worked towards the migration of notification services backend from legacy system (YesMail) to modern architecture (Adobe Notification Services)</li>
+                  </ul>
+               </div>
+            </div>
+
+            <div class="timeline-item">
+               <div class="timeline-dot"></div>
+               <div class="timeline-date">2018 - 2019</div>
+               <h3 class="timeline-title">Associate Cybersecurity Engineer</h3>
+               <div class="timeline-company">Identity & Access Management, Visa Inc.</div>
+               <div class="timeline-description">
+                  <ul>
+                     <li>Deployed and maintained API integrations between ServiceNow and internal IAM systems, this reduced user request fulfillment time from 7 days to 24 hours (72% reduction)</li>
+                     <li>Independently managed and resolved 70 production incident tickets with 0 SLA breaches, maintaining 100% compliance with response time requirements</li>
+                     <li>Led ForgeRock OpenAM integration with 6 internal products to enforce secure identity and access management protocols, enhancing authentication security for internal tools and applications</li>
+                  </ul>
+               </div>
+            </div>
+
+            <div class="timeline-item">
+               <div class="timeline-dot"></div>
+               <div class="timeline-date">Jan 2018 - Jun 2018</div>
+               <h3 class="timeline-title">Software Development Intern</h3>
+               <div class="timeline-company">Infineon Technologies</div>
+               <div class="timeline-description">
+                  <ul>
+                     <li>Developed an interactive chatbot using Neural Networks and Random Forest Classifiers with TensorFlow, Scikit-learn libraries, and Django</li>
+                     <li>Built comprehensive datasets to train ML models and engineered a web service to analyze performance against new user inputs</li>
+                     <li>Enhanced a legacy Inventory Management Tool built on ASP.NET by adding new features, fixing bugs, and optimizing code</li>
+                  </ul>
+               </div>
+            </div>
+
+            <div class="timeline-item">
+               <div class="timeline-dot"></div>
+               <div class="timeline-date">2020 - 2021</div>
+               <h3 class="timeline-title">Postgraduate Degree in Software Development</h3>
+               <div class="timeline-company">International Institute of Information Technology, Bangalore</div>
+               <div class="timeline-description">
+                  <p>Full Stack Development with coursework in Software Engineering Frameworks, Server-Side Development, API Backend & Frontend Development, and DevOps</p>
+               </div>
+            </div>
+
+            <div class="timeline-item">
+               <div class="timeline-dot"></div>
+               <div class="timeline-date">2014 - 2018</div>
+               <h3 class="timeline-title">Bachelor of Engineering in Computer Science</h3>
+               <div class="timeline-company">Birla Institute of Technology, Mesra</div>
+               <div class="timeline-description">
+                  <p>First Class with Distinction. Coursework included Parallel & Distributed Computing, Data Mining & Data Warehousing, Artificial Intelligence, and Database Management Systems</p>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</main>
+<Footer />
+</body>
 </html>
