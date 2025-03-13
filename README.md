@@ -1,5 +1,3 @@
-# Coookie Eater's Website
+# Website documentation
 
-This repository contains Astro based code to deploy to GitHub pages for my own website. This website contains blog posts, documentations, etc. maintained by me. 
-
-As of now, the default Astro template is in use.
+Deployed using Astro pages.

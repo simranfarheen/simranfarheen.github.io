@@ -1,6 +1,6 @@
 ---
-title: 'Pointers and 2-D Arrays'
-description: 'A technical blog explaining pointers and 2-D Arrays in C'
+title: 'Pointers and 2-D Arrays in C/C++'
+description: 'A technical blog explaining pointers and 2-D Arrays in C/C++'
 pubDate: 'Jul 10 2017'
 ---
 
@@ -74,4 +74,6 @@ Since, \*(a+i) points to the location 0x23fe3c which holds an integer pointer, \
 This yields the memory location 0x23fe44 which is the location of the a[1][2] element and \*(\*(a+i)+j) = value stored at 0x23fe44.
 
 This is how 2-D arrays are allocated and accessed in memory.
+
+Hope you enjoyed reading this article. For suggestions or feedback, please write to me at simranfarheen@hotmail.com.
 
