@@ -7,16 +7,184 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h1>Hello, I'm Simran</h1>
-			<p><u>Watch this space for exciting stuff, coming soon.</u></p>
+    <head>
+       <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+       <style>
+          .timeline-container {
+             max-width: 800px;
+             margin: 0 auto;
+             padding: 20px;
+          }
 
-		</main>
-		<Footer />
-	</body>
+          .timeline {
+             position: relative;
+             margin: 40px 0;
+          }
+
+          .timeline::before {
+             content: '';
+             position: absolute;
+             left: 70px;
+             width: 4px;
+             height: 100%;
+             background: #2563eb;
+          }
+
+          .timeline-item {
+             position: relative;
+             padding-left: 110px;
+             margin-bottom: 50px;
+          }
+
+          .timeline-dot {
+             position: absolute;
+             left: 64px;
+             width: 16px;
+             height: 16px;
+             border-radius: 50%;
+             background: #2563eb;
+             border: 4px solid white;
+             box-shadow: 0 0 0 3px #2563eb;
+          }
+
+          .timeline-date {
+             position: absolute;
+             left: 0;
+             width: 55px;
+             text-align: right;
+             font-weight: bold;
+             color: #2563eb;
+             white-space: nowrap;
+          }
+
+          .timeline-content {
+             background: #f8fafc;
+             padding: 20px;
+             border-radius: 8px;
+             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          }
+
+          .timeline-title {
+             margin-top: 0;
+             color: #1e40af;
+             font-size: 1.5rem;
+          }
+
+          .timeline-company {
+             color: #64748b;
+             font-weight: 600;
+             margin-bottom: 10px;
+          }
+
+          .timeline-description ul {
+             padding-left: 20px;
+          }
+
+          .profile-intro {
+             max-width: 800px;
+             margin: 0 auto 40px;
+             text-align: center;
+          }
+
+          h1 {
+             font-size: 2.5rem;
+             margin-bottom: 10px;
+          }
+
+          .subtitle {
+             font-size: 1.2rem;
+             color: #64748b;
+             margin-bottom: 20px;
+          }
+       </style>
+    </head>
+    <body>
+       <Header />
+       <main>
+          <div class="profile-intro">
+             <h1>Hello, I'm Simran</h1>
+             <p class="subtitle">Software Engineer with expertise in Java, Microservices, and Cloud Technologies</p>
+             <p>I build scalable backend systems and enjoy solving complex problems. Here's my professional journey so far.</p>
+          </div>
+
+          <div class="timeline-container">
+             <div class="timeline">
+                <div class="timeline-item">
+                   <div class="timeline-date">2021</div>
+                   <div class="timeline-dot"></div>
+                   <div class="timeline-content">
+                      <h3 class="timeline-title">Software Engineer</h3>
+                      <div class="timeline-company">Visa Direct, Visa Inc. (2021 - 06/2024)</div>
+                      <div class="timeline-description">
+                         <ul>
+                            <li>Developed micro-services for data replication and querying related to India's outward remittances to meet regulatory requirements</li>
+                            <li>Built a near real-time pipeline (< 50ms) for capturing payment API observability metrics</li>
+                            <li>Led a team to create an MVP for intelligent querying of payment data using Elasticsearch</li>
+                            <li>Drove 100% adoption of Feature Toggle platform across teams</li>
+                         </ul>
+                      </div>
+                   </div>
+                </div>
+
+                <div class="timeline-item">
+                   <div class="timeline-date">2019</div>
+                   <div class="timeline-dot"></div>
+                   <div class="timeline-content">
+                      <h3 class="timeline-title">Software Engineer</h3>
+                      <div class="timeline-company">Platform and Core Engineering, Visa Inc. (2019 - 2021)</div>
+                      <div class="timeline-description">
+                         <ul>
+                            <li>Maintained in-house Hazelcast clusters and client wrapper libraries</li>
+                            <li>Developed automation to remediate security vulnerabilities in third-party libraries, reducing manual effort by 90%</li>
+                            <li>Contributed to migrating notification services from YesMail to Adobe Messaging Centre</li>
+                         </ul>
+                      </div>
+                   </div>
+                </div>
+
+                <div class="timeline-item">
+                   <div class="timeline-date">2018</div>
+                   <div class="timeline-dot"></div>
+                   <div class="timeline-content">
+                      <h3 class="timeline-title">Software Engineer</h3>
+                      <div class="timeline-company">Cybersecurity, Visa Inc. (2018 - 2019)</div>
+                      <div class="timeline-description">
+                         <ul>
+                            <li>Migrated access request forms from Viper to ServiceNow, reducing fulfillment time from 7 days to 24 hours</li>
+                            <li>Mentored cross-functional teams on securing applications with OpenSAML and Forgerock OpenAM integration</li>
+                         </ul>
+                      </div>
+                   </div>
+                </div>
+
+                <div class="timeline-item">
+                   <div class="timeline-date">2014</div>
+                   <div class="timeline-dot"></div>
+                   <div class="timeline-content">
+                      <h3 class="timeline-title">Education</h3>
+                      <div class="timeline-company">Birla Institute of Technology, Mesra (2014 - 2018)</div>
+                      <div class="timeline-description">
+                         <p>B.E. in Computer Science & Engineering, achieved First Class with Distinction.</p>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+
+          <div class="timeline-container">
+             <h2>Technical Skills</h2>
+             <div class="timeline-content">
+                <div class="timeline-description">
+                   <ul>
+                      <li><strong>Programming Languages:</strong> Java, Python, C++</li>
+                      <li><strong>Frameworks and Libraries:</strong> Spring & Springboot, Django, Hazelcast, Kafka</li>
+                      <li><strong>Databases:</strong> Oracle DB, Postgres DB, MySQL, Elasticsearch</li>
+                      <li><strong>Tools and Platforms:</strong> Docker, Kubernetes, Jenkins, Git</li>
+                   </ul>
+                </div>
+             </div>
+          </div>
+       </main>
+       <Footer />
+    </body>
 </html>
