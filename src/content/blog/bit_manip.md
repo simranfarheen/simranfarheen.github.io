@@ -138,33 +138,33 @@ ___
 ```
 int mask = (1 << k) - 1;
 while (mask < (1 << n)) {
-// Process the combination
-int c = mask & -mask;
-int r = mask + c;
-mask = (((r ^ mask) >> 2) / c) | r;
+    // Process the combination
+    int c = mask & -mask;
+    int r = mask + c;
+    mask = (((r ^ mask) >> 2) / c) | r;
 }
 ```
 
 #### 2. Gray code
 ```
 int grayCode(int n) {
-return n ^ (n >> 1);
+    return n ^ (n >> 1);
 }
 ```
 
 #### 3. Hamming distance (count different bits)
 ```
 int hammingDistance(int x, int y) {
-return Integer.bitCount(x ^ y);
+    return Integer.bitCount(x ^ y);
 }
 ```
 
 #### 4. Next permutation with same number of set bits
 ```
 int nextPermWithSameOnes(int n) {
-int c = n & -n;
-int r = n + c;
-return (((r ^ n) >> 2) / c) | r;
+    int c = n & -n;
+    int r = n + c;
+    return (((r ^ n) >> 2) / c) | r;
 }
 ```
 ___
