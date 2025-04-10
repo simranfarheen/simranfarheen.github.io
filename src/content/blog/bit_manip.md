@@ -7,6 +7,7 @@ pubDate: 'Jan 01 2019'
 Bit Manipulation is an important topic within competitive programming. Knowing the nitty-gritties of Bit Manipulation can help coders get a significant advantage in reducing compute time for certain operations. This article provides a brief summary the topic, detailing hacks where bit manipulation can provide a significant advantage.
 
 ## Foundations of Bit Manipulation
+____
 
 ### Basic Concepts
 - Bits are represented as combinations of 0s and 1s.
@@ -21,6 +22,10 @@ Bit Manipulation is an important topic within competitive programming. Knowing t
 - **<< (Left shift)**: Shifts bits left, multiplies by 2^n
 - **\>> (Right shift)**: Shifts bits right with sign extension, divides by 2^n
 - **\>>> (Unsigned right shift)**: Shifts right with zero fill
+
+
+## Coding Patterns
+____
 
 ### Common Operations
 
@@ -45,6 +50,7 @@ Bit Manipulation is an important topic within competitive programming. Knowing t
 #### 7. Count set bits
 ```int count = Integer.bitCount(num);```
 
+___
 ### Common Patterns
 
 #### 1. Check if power of 2
@@ -99,7 +105,10 @@ while (left < right) {
     else left = mid + 1;
 }
 ```
-### Additional Concepts
+
+## Additional Concepts
+___
+
 
 #### XOR properties
 ```
@@ -122,7 +131,7 @@ int divideBy2pow = num >> k;    // num / 2^k
 - **Integer.numberOfTrailingZeros(n)**: Count trailing zeros
 - **Integer.highestOneBit(n)**: Returns highest set bit
 - **Integer.lowestOneBit(n)**: Returns lowest set bit
-
+___
 ### Advanced Techniques
 
 #### 1. Gosper's Hack (Generate all k-bit combinations)
@@ -158,7 +167,7 @@ int r = n + c;
 return (((r ^ n) >> 2) / c) | r;
 }
 ```
-
+___
 ### Final Notes
 Remember to consider integer overflow issues when working with bit manipulation in Java!
 
