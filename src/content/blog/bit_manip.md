@@ -4,17 +4,17 @@ description: 'An all-you-need-to-know article on Bit Manipulation in Java'
 pubDate: 'Jan 01 2019'
 ---
 
-Bit Manipulation is an important topic within competitive programming. Knowing the nitty-gritties of Bit Manipulation can help coders get a significant advantage in reducing compute time for certain operations. This article provides a brief summary the topic, detailing hacks where bit manipulation can provide a significant advantage.
+Bit Manipulation is an important topic within competitive programming. Knowing the nitty-gritties of Bit Manipulation can help coders get a significant advantage in reducing compute time for certain operations. This article provides a brief summary of the topic, detailing hacks where bit manipulation can provide a significant advantage.
 
-## Foundations of Bit Manipulation
-____
 
 ### Basic Concepts
+___
 - Bits are represented as combinations of 0s and 1s.
 - In Java, integers are 32-bit (4-bytes) and long integers are 64-bit (8-bytes)
 - The 32nd bit and the 64th bit in each represent the "sign" of the integer, whereas the remaining 31 and 63 bits represent the actual number.
 
 ### Bit Operators
+___
 - **& (AND)**: Returns 1 if both bits are 1
 - **| (OR)**: Returns 1 if at least one bit is 1
 - **^ (XOR)**: Returns 1 if exactly one bit is 1
@@ -23,38 +23,71 @@ ____
 - **\>> (Right shift)**: Shifts bits right with sign extension, divides by 2^n
 - **\>>> (Unsigned right shift)**: Shifts right with zero fill
 
-
-## Coding Patterns
-____
-
 ### Common Operations
+___
 
-#### 1. Check if ith bit is set
-```boolean isSet = (num & (1 << i)) != 0;```
+#### 1. Check if ith bit is set  
+- Left Shift the set bit in 1 to i places.
+- Perform the AND operation with the set bit.
+- Check if the resultant number is not equal to 0.
+
+```
+boolean isSet = (num & (1 << i)) != 0;
+```
 
 #### 2. Set ith bit
-```num |= (1 << i);```
+- Left Shift the set bit in 1 by i places.
+- Perform the OR operation with the set bit.
+
+```
+num |= (1 << i);
+```
 
 #### 3. Clear ith bit
-```num &= ~(1 << i);```
+- Left Shift the set bit in 1 by i places.
+- Take the complement of the result to unset the bit at the ith position
+- Perform AND operation with the unset bit.
+```
+num &= ~(1 << i);
+```
 
 #### 4. Toggle ith bit
-```num ^= (1 << i);```
+- Left Shit the set bit in 1 by i places.
+- Perform XOR operation with the set bit.
+```
+num ^= (1 << i);
+```
 
 #### 5. Get lowest set bit
-```int lowestBit = num & (-num);```
+- Take the complement of the number.
+- Perform AND operation with itself.
+```
+int lowestBit = num & (-num);
+```
 
 #### 6. Clear lowest set bit
-```num &= (num - 1);```
+- Take the 2s complement of the number.
+- Perform AND operation with itself.
+```
+num &= (num - 1);
+```
 
 #### 7. Count set bits
-```int count = Integer.bitCount(num);```
+- Using the Java in-built library function.
+```
+int count = Integer.bitCount(num);
+```
 
 ___
 ### Common Patterns
 
 #### 1. Check if power of 2
-```boolean isPowerOf2 = (num & (num - 1)) == 0 && num > 0;```
+- AND the number with its 2s complement and check if the result is equal to 0.
+- If it is, then this number is a power of 2, else it is not.
+- Ensure the number is greater than 0.
+```
+boolean isPowerOf2 = (num & (num - 1)) == 0 && num > 0;
+```
 
 #### 2. Subset generation (iterating all subsets of n elements)
 ```
